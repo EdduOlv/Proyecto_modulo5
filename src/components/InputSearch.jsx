@@ -1,6 +1,8 @@
 import { Button, Container, TextField, Typography, } from "@mui/material";
 
 import React, { useRef, useState } from "react";
+import { BookCard } from "./BookCard";
+
 
 
 export const InputSearch = () => {
@@ -17,7 +19,7 @@ export const InputSearch = () => {
         throw new Error(`El libro no existe en la libreria`)
       }
       const data = await response.json();
-      setBooks(data)
+      setBooks(data.items.map(book => book.volumeInfo))
       setError(null)
 
     } catch (error) {
@@ -49,12 +51,14 @@ export const InputSearch = () => {
         <Typography variant="body1" color={error}>
           {error}
         </Typography>
+
       )}
-      {
-        books && (
-          <div>la data se mostrata en consola{console.log(books)}</div>
-        )
-      }
+      {books && (
+        <div>
+          <BookCard books={books}/>
+        </div>
+      )}
+      
     </Container>
 
 
