@@ -19,9 +19,8 @@ export const InputSearch = () => {
         throw new Error(`El libro no existe en la libreria`)
       }
       const data = await response.json();
-      setBooks(data.items.map(book => book.volumeInfo))
+      setBooks(data.items)
       setError(null)
-
     } catch (error) {
 
       setError(error.message)
@@ -32,7 +31,7 @@ export const InputSearch = () => {
   return (
 
     <Container elevation={4}>
-      <h1>Busca tu libro</h1>
+      <h3>Busca tu libro</h3>
       <TextField
         onKeyDown={fetchBooks}
         inputRef={inputRef}

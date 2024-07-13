@@ -70,3 +70,65 @@
 //     </div>
 //   );
 // };
+
+//PROFE ->>!
+
+// import { Card, CardMedia, CardContent, Typography, CardActions, Button } from '@mui/material';
+// import React, { useEffect, useState } from "react";
+ 
+// // Importación duplicada de Typography eliminada
+ 
+// export const BookCard = ({ foundBook }) => {
+//   const [booksData, setBooksData] = useState([]);
+ 
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(foundBook)}&key=AIzaSyCCx3Nfkt4VCEMidzgTBLViA6HGUb3sIO8`;
+//       try {
+//         const response = await fetch(url);
+//         const data = await response.json();
+//         setBooksData(data.items || []);
+//       } catch (error) {
+//         console.error("Error fetching data: ", error);
+//         setBooksData([]);
+//       }
+//     };
+ 
+//     if (foundBook) {
+//       fetchData();
+//     }
+//   }, [foundBook]);
+ 
+//   const handleShowDetails = (book) => {
+//     console.log('Detalles del libro:', book);
+//     // Aquí puedes expandir la funcionalidad, por ejemplo, abrir un modal con los detalles
+//   };
+ 
+//   return (
+//     <>
+//       {booksData.map((book, index) => (
+//         <Card key={book.id || index} sx={{ maxWidth: 345 }}>
+//           <CardMedia
+//             component="img"
+//             alt={book.volumeInfo.title || 'Book image'}
+//             height="140"
+//             src={book.volumeInfo.imageLinks?.thumbnail || 'path/to/default/image.jpg'}
+//           />
+//           <CardContent>
+//             <Typography gutterBottom variant="h5" component="div">
+//               {book.volumeInfo.title}
+//               {book.volumeInfo.authors}
+//             </Typography>
+//             <Typography variant="body2" color="text.secondary">
+//               {book.volumeInfo.description}
+//             </Typography>
+//           </CardContent>
+//           <CardActions>
+//             <Button size="small">Share</Button>
+//             <Button className='btn-book' variant="primary" onClick={() => handleShowDetails(book)}></Button>
+//           </CardActions>
+//         </Card>
+//       ))}
+//     </>
+//   );
+// };

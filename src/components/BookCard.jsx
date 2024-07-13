@@ -5,31 +5,46 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
 export const BookCard = ({ books }) => {
+ 
+  const navigate = useNavigate()
+  
+  const handleClick = (book) => {
+    console.log(book.id);
+    navigate(`/Detail/${book.id}`, {state: { book } })
+  }
+  
+
   return (
     <>
-      {books.map((element) => {
-        
+      {books.map((book) => {
+
         return (
-          <Card sx={{ maxWidth: 345 }}>
+          
+          <Card  key={book.id} sx={{ maxWidth: 345 }}>
             <CardMedia
               component="img"
-              alt="green iguana"
+              alt="thumbnail"
               height="140"
-              src={element.imageLinks && element.imageLinks.thumbnail}
+              src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {element.title}
+                {book.volumeInfo.title}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-              {element.description}
+                Autor
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Share</Button>
-              <Button size="small">Learn More</Button>
+              <Button
+              key={book.id}
+              onClick={() => handleClick(book)}
+              size="small">
+                ir al detalle
+              </Button>
             </CardActions>
           </Card>
         );
