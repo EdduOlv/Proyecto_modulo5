@@ -5,7 +5,7 @@ import { BookCard } from "./BookCard";
 
 
 
-export const InputSearch = () => {
+export const Gender = () => {
 
   const [books, setBooks] = useState(null);
   const [error, setError] = useState(null);
@@ -14,7 +14,7 @@ export const InputSearch = () => {
   const fetchBooks = async () => {
     const foundBook =inputRef.current.value;
     try {
-      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${foundBook}&key=AIzaSyCCx3Nfkt4VCEMidzgTBLViA6HGUb3sIO8`)
+      const response = await fetch(` https://www.googleapis.com/books/v1/volumes?q=subject:fantasy+youngadult&printType=books&langRestrict=en&maxResults=40&key=AIzaSyCCx3Nfkt4VCEMidzgTBLViA6HGUb3sIO8`)
       if (!response.ok) {
         throw new Error(`El libro no existe en la libreria`)
       }
@@ -22,7 +22,7 @@ export const InputSearch = () => {
       console.log('la data');
       console.log(data);
       console.log('la data');
-      setBooks(data.items)
+      setBooks(data)
       setError(null)
     } catch (error) {
 
@@ -30,21 +30,6 @@ export const InputSearch = () => {
       setBooks(null);
     }
   }
-  const fetchSubject = async () => {
-    try {
-      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:romance&printType=books&maxResults=40&key=AIzaSyCCx3Nfkt4VCEMidzgTBLViA6HGUb3sIO8`)
-      if (!response.ok) {
-        throw new Error(`El libro no existe en la libreria`)
-      }
-      const data = await response.json();
-      console.log('la data sin filtro en');
-      console.log(data);
-      setError(null)
-    } catch (error) {
-      setError(error.message)
-    }
-  }
-  
 
   return (
 
@@ -64,23 +49,17 @@ export const InputSearch = () => {
       >
         Buscar
       </Button>
-      <Button
-        variant="contained"
-        onClick={fetchSubject}
-      >
-        Busqueda genero 
-      </Button>
       {error && (
         <Typography variant="body1" color={error}>
           {error}
         </Typography>
 
       )}
-      {books && (
+      {/* {books && (
         <div>
           <BookCard books={books}/>
         </div>
-      )}
+      )} */}
       
     </Container>
 
