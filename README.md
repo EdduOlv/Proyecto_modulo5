@@ -89,7 +89,7 @@ Es la caja y la carta que da los estilos de cómo se enseña el tumbnail de la i
 
 El despliegue para la visualicacion del proyecto sera atraves de netlyfi a traves de este enlace : 
 
- https://66988a30ae3d1b2acbdc13fe--proyecto5bookapi.netlify.app/Detail/7Tk4EAAAQBAJ
+ https://66988c3b8762662fef966920--proyecto5bookapi.netlify.app
 
 
 
