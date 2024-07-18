@@ -1,56 +1,52 @@
-import { Button, Container, TextField, Typography, } from "@mui/material";
-
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React, { useRef, useState } from "react";
-import { BookCard } from "./BookCard";
-
-
+import { Resultados } from "./Resultados";
 
 export const InputSearch = () => {
-
   const [books, setBooks] = useState(null);
   const [error, setError] = useState(null);
-  const inputRef = useRef(null)
+  const [loading, setLoading] = useState(true)
+  const inputRef = useRef(null);
 
   const fetchBooks = async () => {
-    const foundBook =inputRef.current.value;
+    const foundBook = inputRef.current.value;
     try {
-      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${foundBook}&key=AIzaSyCCx3Nfkt4VCEMidzgTBLViA6HGUb3sIO8`)
+      setLoading(true)
+      const response = await fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=${foundBook}&maxResults=40&key=AIzaSyCCx3Nfkt4VCEMidzgTBLViA6HGUb3sIO8`
+      );
       if (!response.ok) {
-        throw new Error(`El libro no existe en la libreria`)
+        throw new Error(`El libro no existe en la libreria`);
+        setLoading(false)
       }
       const data = await response.json();
-      console.log('la data');
-      console.log(data);
-      console.log('la data');
-      setBooks(data.items)
-      setError(null)
+      setBooks(data.items);
+      setError(null);
+      setLoading(false)
     } catch (error) {
-
-      setError(error.message)
+      setError(error.message);
       setBooks(null);
+      setLoading(false)
     }
-  }
-  const fetchSubject = async () => {
-    try {
-      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:romance&printType=books&maxResults=40&key=AIzaSyCCx3Nfkt4VCEMidzgTBLViA6HGUb3sIO8`)
-      if (!response.ok) {
-        throw new Error(`El libro no existe en la libreria`)
-      }
-      const data = await response.json();
-      console.log('la data sin filtro en');
-      console.log(data);
-      setError(null)
-    } catch (error) {
-      setError(error.message)
-    }
-  }
-  
+  };
 
   return (
-
-    <Container elevation={4}>
-      <h3>Busca tu libro</h3>
+    <>
+      <Grid
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
       <TextField
+        sx={{ maxWidth: 200 }}
         onKeyDown={fetchBooks}
         inputRef={inputRef}
         fullWidth
@@ -58,36 +54,19 @@ export const InputSearch = () => {
         placeholder="Ingrese titulo del libro"
         margin="normal"
       />
-      <Button
-        variant="contained"
-        onClick={fetchBooks}
-      >
+    <Button variant="contained" onClick={fetchBooks}>
         Buscar
       </Button>
-      <Button
-        variant="contained"
-        onClick={fetchSubject}
-      >
-        Busqueda genero 
-      </Button>
+      </Grid>
+      <Grid></Grid>
       {error && (
         <Typography variant="body1" color={error}>
           {error}
         </Typography>
-
-      )}
-      {books && (
-        <div>
-          <BookCard books={books}/>
-        </div>
       )}
       
-    </Container>
 
-
+      <Resultados books={books} loading={loading} />
+    </>
   );
-
-
-
-
 };

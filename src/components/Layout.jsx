@@ -1,20 +1,25 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import { NavBar } from '../components/NavBar'
-import SideNav from './SideNav'
-import { Box } from '@mui/material'
-
-
+import React from "react";
+import { Outlet } from "react-router-dom";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import { SideNav } from "./SideNav";
 
 export const Layout = () => {
   return (
     <>
-        <Box sx={{ display: 'flex' }}>
-
-        <SideNav/>
-        <Outlet/>
-        </Box>
-   
+      <Box sx={{ display: "flex",  backgroundColor: "#F4F4EFff"}}>
+        <SideNav />
+        <Container
+          fixed
+          sx={{
+            marginTop: "2rem",
+            display: "flex",
+          }}
+        >
+          <Box sx={{ width: "100%", marginTop: "3.5rem", }} >
+            <Outlet />
+          </Box>
+        </Container>
+      </Box>
     </>
-  )
-}
+  );
+};
