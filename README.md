@@ -39,7 +39,6 @@ Proyecto_Modulo_5
 │     └─ index.css
 │     └─ main.jsx
 │     └─ Router.jsx
-├─ .env
 ├─ index.html
 ├─ README.md
 ├─ package-lock.json
@@ -88,7 +87,9 @@ Es la caja y la carta que da los estilos de cómo se enseña el tumbnail de la i
 
 # Despliegle
 
-El despliegue para la visualicacion del proyecto sera atraves de netlyfi a traves de este enlace :
+El despliegue para la visualicacion del proyecto sera atraves de netlyfi a traves de este enlace : 
+
+ https://66988a30ae3d1b2acbdc13fe--proyecto5bookapi.netlify.app/Detail/7Tk4EAAAQBAJ
 
 
 
